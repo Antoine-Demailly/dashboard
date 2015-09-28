@@ -16,7 +16,12 @@ body {
 
 ::-webkit-scrollbar-thumb
 {
-    background-color: #000000;
+    background-color: #1F2532;
+}
+
+header, nav, .sidebar-right {
+  /* Fix Chrome Fixed Block*/
+  -webkit-transform: translateZ(0);
 }
 
 header {
