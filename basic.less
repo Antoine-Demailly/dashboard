@@ -1,0 +1,121 @@
+@header-height: 60px;
+
+@nav-width: 320px;
+@nav-translate-out: @nav-width - @header-height;
+@nav-less-translate: @nav-width - @nav-translate-out;
+
+@basic-padding: 20px;
+
+@transition-swift-out: cubic-bezier(.55,0,.1,1);
+
+.calc(@prop; @val) {
+  @{prop}: calc(~'@{val}');
+  @{prop}: -moz-calc(~'@{val}');
+  @{prop}: -webkit-calc(~'@{val}');
+  @{prop}: -o-calc(~'@{val}');
+}
+
+body {
+  background-color: #F9F9FB;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background-color: #1F2532;
+}
+
+header, nav, .sidebar-right {
+  /* Fix Chrome Fixed Block*/
+  -webkit-transform: translateZ(0);
+}
+
+header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: @header-height;
+  background-color: #26A69A;
+  box-shadow: 3px 2px 2px rgba(0,0,0,0.25);
+  z-index: 900;
+}
+
+.header {
+  padding-left: @nav-width - @nav-translate-out + @basic-padding; padding-right: @basic-padding;
+}
+
+.header h1, .content-right {
+  line-height: @header-height
+}
+
+.header h1 {
+  display: inline;
+  color: white;
+}
+
+.content-right {
+  float: right;
+}
+
+.sidebar-right {
+  position: fixed;
+  top: @header-height; right: 0;
+  width: @nav-width;
+  .calc(height, ~"100vh - "@header-height);
+  overflow: auto;
+  
+  background-color: #00695C;
+  color:white;
+  z-index: 800;
+  
+  transform: translateX(@nav-width);
+  transition: transform 0.3s @transition-swift-out;
+}
+
+.sidebar-right-open {
+  transform: translateX(0);
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0;
+  width: @nav-width; height: 100vh;
+  background-color: #1F2532;
+  transform: translateX(-@nav-translate-out);
+  transition: transform 0.3s @transition-swift-out;
+
+  z-index: 1000;
+}
+
+nav:hover,nav:focus {
+  transform: translateX(0);
+}
+
+.nav-header {
+  padding-left: @basic-padding; padding-right: @basic-padding;
+  min-height: @header-height;
+  line-height: @header-height;
+  background-color: #009688;
+}
+
+.nav-header img {
+  float: right;
+}
+
+section {
+  padding: @header-height + @basic-padding @basic-padding @basic-padding @nav-less-translate + @basic-padding;
+}
+
+.justify {
+  text-align: justify;
+}
