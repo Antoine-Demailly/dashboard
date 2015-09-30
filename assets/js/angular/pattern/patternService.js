@@ -6,4 +6,4 @@
     // Exemple de service
 
   }]);
-}());
+})();
