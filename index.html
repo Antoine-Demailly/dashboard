@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myprivateplaceApp">
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
@@ -8,9 +8,17 @@
   <link rel="stylesheet" href="bower_components/semantic-ui/dist/semantic.min.css">
   <link rel="stylesheet" href="basic.css">
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src!"bower_components/semantic-ui/dist/semantic.min.js"></script>
+  <script src="bower_components/angularjs/angular.min.js"></script>
+  <script src="bower_components/semantic-ui/dist/semantic.min.js"></script>
+  
+  <script src="js/angular/app.js"></script>
+
+  <script src="js/angular/service/routeService.js"></script>
+  <script src="js/angular/service/dashboardService.js"></script>
+
+  <script src="js/angular/controller/DashboardController.js"></script>
 </head>
-<body>
+<body ng-controller="DashboardController as DashboardController" ng-init="DashboardController.init()">
   <header>
     <div class="header">
       <h1>Hello World</h1>
@@ -19,23 +27,55 @@
       </div>
     </div>
   </header>
+
+  <!-- Nav -->
+  <div class="nav-header-picture-container">
+    <img src="logo.jpg" alt="Logo" class="nav-header-picture">
+  </div>
   <nav>
     <div class="nav-header">
+      <div class="nav-header-name">Antoine Demailly</div>
     </div>
+    <ul>
+      <li class="nav-li-popup" data-content="Dashboard (D)">
+        <span class="li-name">Dashboard</span>
+        <div class="nav-icon-right">
+          <i class="dashboard large icon"></i>
+        </div>
+      </li>
+      <li class="nav-li-popup" data-content="Amis (A)">
+        <span class="li-name">Amis</span>
+        <div class="nav-icon-right">
+          <i class="users large icon"></i>
+        </div>
+      </li>
+      <li class="nav-li-popup" data-content="Fichiers (F)">
+        <span class="li-name">Fichiers</span>
+        <div class="nav-icon-right">
+          <i class="folder open outline large icon"></i>
+        </div>
+      </li>
+      <li class="nav-li-popup" data-content="Paramètres (P)">
+        <span class="li-name">Paramètres</span>
+        <div class="nav-icon-right">
+          <i class="setting large icon"></i>
+        </div>
+      </li>
+      <div class="ui divider"></div>
+      <li id="show-menu">
+        <span class="li-name">Plus</span>
+        <div class="nav-icon-right">
+          <i class="plus large icon"></i>
+        </div>
+      </li>
+    </ul>
+    
   </nav>
   <div class="sidebar-right">
     <h2>Sidebar</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga architecto, debitis, tempora numquam veniam fugit quibusdam vel ab eligendi vitae reprehenderit voluptas doloribus accusamus a consequatur explicabo nesciunt, commodi ullam?</p>
   </div>
   <section>
-    <!-- <div class="ui container">
-      <div class="justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto rem repellendus quibusdam laudantium, quam cupiditate, vitae perspiciatis eaque suscipit ullam quidem dolor eius adipisci dolorem accusamus doloremque, hic sit deserunt? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto rem repellendus quibusdam laudantium, quam cupiditate, vitae perspiciatis eaque suscipit ullam quidem dolor eius adipisci dolorem accusamus doloremque, hic sit deserunt?
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto rem repellendus quibusdam laudantium, quam cupiditate, vitae perspiciatis eaque suscipit ullam quidem dolor eius adipisci dolorem accusamus doloremque, hic sit deserunt? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto rem repellendus quibusdam laudantium, quam cupiditate, vitae perspiciatis eaque suscipit ullam quidem dolor eius adipisci dolorem accusamus doloremque, hic sit deserunt?
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto rem repellendus quibusdam laudantium, quam cupiditate, vitae perspiciatis eaque suscipit ullam quidem dolor eius adipisci dolorem accusamus doloremque, hic sit deserunt? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto rem repellendus quibusdam laudantium, quam cupiditate, vitae perspiciatis eaque suscipit ullam quidem dolor eius adipisci dolorem accusamus doloremque, hic sit deserunt?
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto rem repellendus quibusdam laudantium, quam cupiditate, vitae perspiciatis eaque suscipit ullam quidem dolor eius adipisci dolorem accusamus doloremque, hic sit deserunt? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto rem repellendus quibusdam laudantium, quam cupiditate, vitae perspiciatis eaque suscipit ullam quidem dolor eius adipisci dolorem accusamus doloremque, hic sit deserunt?
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto rem repellendus quibusdam laudantium, quam cupiditate, vitae perspiciatis eaque suscipit ullam quidem dolor eius adipisci dolorem accusamus doloremque, hic sit deserunt? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto rem repellendus quibusdam laudantium, quam cupiditate, vitae perspiciatis eaque suscipit ullam quidem dolor eius adipisci dolorem accusamus doloremque, hic sit deserunt?</div>
-    </div> -->
-
     <div class="ui stackable grid">
       <div class="six wide column">
         <div class="ui raised segment justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto rem repellendus quibusdam laudantium, quam cupiditate, vitae perspiciatis eaque suscipit ullam quidem dolor eius adipisci dolorem accusamus doloremque, hic sit deserunt? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto rem repellendus quibusdam laudantium, quam cupiditate, vitae perspiciatis eaque suscipit ullam quidem dolor eius adipisci dolorem accusamus doloremque, hic sit deserunt?
@@ -55,8 +95,17 @@
 </body>
 <script>
   $('#button-sidebar').click(function(){
-    console.log('click');
     $('.sidebar-right').toggleClass('sidebar-right-open');
+  });
+
+  $('#show-menu').click(function(){
+    $('nav').toggleClass('nav-open');
+  });
+
+  $(function() {
+    $('.nav-li-popup').popup({
+      position: 'right center',
+    });
   });
 </script>
 </html>

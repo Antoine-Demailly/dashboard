@@ -12,9 +12,13 @@ body {
 ::-webkit-scrollbar-thumb {
   background-color: #1F2532;
 }
+.float-right {
+  float: right;
+}
 header,
 nav,
-.sidebar-right {
+.sidebar-right,
+.nav-header-picture-container {
   /* Fix Chrome Fixed Block*/
   -webkit-transform: translateZ(0);
 }
@@ -73,19 +77,59 @@ nav {
   transition: transform 0.3s cubic-bezier(0.55, 0, 0.1, 1);
   z-index: 1000;
 }
-nav:hover,
-nav:focus {
+.nav-open {
   transform: translateX(0);
 }
-.nav-header {
-  padding-left: 20px;
-  padding-right: 20px;
+.nav-header-picture-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  z-index: 1100;
+}
+.nav-header-picture {
+  width: 100%;
+}
+nav .nav-header {
   min-height: 60px;
   line-height: 60px;
   background-color: #009688;
 }
-.nav-header img {
+nav .nav-header-name {
+  height: 60px;
+  line-height: 60px;
+  overflow: hidden;
+  padding-left: 80px;
+  padding-right: 20px;
+  font-size: 20px;
+  color: white;
+}
+nav ul {
+  list-style: none;
+}
+nav li {
+  height: 60px;
+  line-height: 60px;
+  padding-left: 20px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+nav .li-name {
+  font-size: 18px;
+}
+nav li:hover {
+  color: #009688;
+  background-color: #F9F9FB;
+}
+nav .nav-icon-right {
   float: right;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
 }
 section {
   padding: 80px 20px 20px 80px;
